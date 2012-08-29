@@ -1,0 +1,84 @@
+require 'rubygems'
+
+desc "Create site structure"
+task :create  do
+  FileUtils.mkdir_p("site/assets")
+  FileUtils.cp("lib/styles.css", "site/assets")
+end
+
+desc "generate a markdown log file with changes for all page"
+task :log do
+  FileUtils.rm("history.md")
+  history = {}
+  Dir[File.join("**", "**", "*.md")].each do |file|
+    history[file] = %x[git log --pretty=format:"%h - %an, %ar : %s" -- #{file}]
+  end
+  content = history.inject("") do |page, (file, hist)|
+    page << "## #{file} ##\n\n"
+    hist.each_line do |line|
+    	page << "* #{line}"
+    end
+    page << "\n\n"
+    page
+  end
+  File.open("history.md", "w") do |file|
+    file << content
+  end
+end
+
+desc "convert all file in their html version"
+task :generate => [:create, :log] do
+  require 'redcarpet'
+  require 'tilt'
+  index = []
+  toc = Redcarpet::Markdown.new(Redcarpet::Render::HTML_TOC.new)
+  markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(:with_toc_data => true), :fenced_code_blocks => true)
+  template = Tilt::ERBTemplate.new('lib/template.erb')
+  rev = %x[git rev-parse --short HEAD]
+  Dir[File.join("**", "**", "*.md")].each do |file|
+    File.open("site/#{File.basename(file, ".md")}.html", "w") do |f|
+      index << "#{File.basename(file, ".md")}.html"
+      content = File.open(file).read
+      context = {
+	:file => file,
+	:body => markdown.render(content),
+	:toc => toc.render(content),
+	:title => File.basename(file),
+	:last_modified => File.mtime(file).strftime("%d/%m/%Y a %H:%M"),
+	:rev => rev
+      }
+      f << template.render(self, context)
+    end
+  end
+  content = index.inject("") do |page,entry|
+    page << "* [#{File.basename(entry, ".html")}](#{entry})\n"
+    page
+  end
+  File.open("site/index.html", "w") do |file|
+      context = {
+	:file => "",
+	:body => markdown.render(content),
+	:title => "Site Index",
+	:last_modified => Time.now.strftime("%d/%m/%Y a %H:%M"),
+	:rev => rev,
+	:toc => false
+      }
+    file << template.render(self, context)
+  end
+end
+
+desc "Convert to mediawki syntax (to inject into the wiki)"
+task :mediawiki do
+  require 'redcarpet'
+  require "lib/converters/mediawiki"
+  mkdir_p "mediawiki"
+
+  mediawiki = Redcarpet::Markdown.new(MediaWiki.new)
+  Dir[File.join("**", "**", "*.md")].each do |file|
+    File.open("mediawiki/#{File.basename(file, ".md")}.wiki", "w") do |f|
+      f << mediawiki.render(File.open(file).read)
+    end
+  end
+
+end
+

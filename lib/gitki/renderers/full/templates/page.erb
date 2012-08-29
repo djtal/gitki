@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title><%= title %></title>
+    <!-- Le styles -->
+    <link rel="stylesheet" type="text/css" href="assets/normalize.css" media="all, print">
+    <link rel="stylesheet" type="text/css" href="assets/styles.css" media="all, print">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <header>
+      <%= title %>
+    </header>
+
+    <div class="container row">
+      <% if toc %>
+	<div id="toc">
+	  <%= toc %>
+	</div>
+      <% end %>
+      <article>
+	<%= body %>
+      </article>
+    </div> <!-- /container -->
+    <footer class="row">
+      <p class="grid_9 column">
+	<em>Derniere date de modification :  <%= last_modified %></em>
+	 | Version : <%= rev %>
+      </p>
+      <p class="grid_3 column nav"><a href="index.html">Index</a> | <a href="history.html">Historique</a> | <a href="#">Haut</a></p>
+    </footer>
+  </body>
+</html>
