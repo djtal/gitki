@@ -11,7 +11,8 @@ module Gitki
     def initialize(source_path,opts={})
       @source_path = source_path
       @source_path = File.expand_path(@source_path)
-      @site_path = File.expand_path(opts[:to]) || File.join(@source_path, "site")
+      @site_path = opts[:to] || File.join(@source_path, "site")
+      @source_path =File.expand_path(@source_path)
       @renderer = Renderer::Full.new
     end
 
