@@ -11,7 +11,7 @@ module Gitki
     def initialize(source_path,opts={})
       @source_path = source_path
       @source_path = File.expand_path(@source_path)
-      @site_path = opts[:site_path] || File.join(@source_path, "site")
+      @site_path = File.expand_path(opts[:to]) || File.join(@source_path, "site")
       @renderer = Renderer::Full.new
     end
 
@@ -63,7 +63,7 @@ module Gitki
     end
 
     def create_site
-      FileUtils.rm_r @site_path
+      FileUtils.rm_r @site_path if File.exist?(@site_path)
       FileUtils.mkdir_p @site_path
       FileUtils.mkdir(File.join(@site_path, "assets"))
       @renderer.assets.each do |asset|
