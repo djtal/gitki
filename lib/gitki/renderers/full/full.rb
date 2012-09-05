@@ -8,7 +8,7 @@ module Gitki
     # render the site with a full html temlpaet and markdonw converted into html
     # Use RdCarpet to first cnver markdwon to html
     # and then wrap it into a good looking page store in a erb template
-    class Full
+    class Full < Renderer
       attr_accessor :template
       attr_accessor :resources_path
 

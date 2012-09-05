@@ -12,6 +12,13 @@ module Gitki
       ki = Gitki.new(options[:from], :to => options[:to])
       ki.generate
     end
+
+    desc "themes", "List installed themes"
+    def themes
+      Renderer::Renderer.list.each do |render|
+      	p render
+      end
+    end
   end
 
 end
