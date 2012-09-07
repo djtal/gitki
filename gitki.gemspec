@@ -20,4 +20,5 @@ Gem::Specification.new do |gem|
   gem.add_dependency "redcarpet"
   gem.add_dependency "tilt"
   gem.add_dependency "active_support"
+  gem.add_dependency "pygments.rb"
 end

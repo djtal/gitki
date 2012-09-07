@@ -1,5 +1,6 @@
 require 'redcarpet'
 require 'tilt'
+require 'gitki/renderers/full/pygment_markdown'
 
 module Gitki
 
@@ -13,7 +14,7 @@ module Gitki
       attr_accessor :resources_path
 
       def initialize
-	@converter = Redcarpet::Markdown.new(Redcarpet::Render::HTML.new, :fenced_code_blocks => true, :with_toc_data => true)
+	@converter = Redcarpet::Markdown.new(PygmentMarkdown.new, :fenced_code_blocks => true, :with_toc_data => true)
 	@toc = Redcarpet::Markdown.new(Redcarpet::Render::HTML_TOC.new)
 	@resources_path = File.dirname(File.expand_path(__FILE__))
       end
@@ -24,7 +25,8 @@ module Gitki
 	toc ||= true
         content = @converter.render(file)
         context = {
-	  :body => content
+	  :body => content,
+	  :code_css => PygmentMarkdown.code_css
 	}.merge(opts)
 	context[:toc] = @toc.render(file) if toc
 	template.render self, context

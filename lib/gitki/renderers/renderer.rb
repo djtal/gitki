@@ -15,6 +15,12 @@ module Gitki
         subclass
       end
 
+      def self.get name, opts = {}
+	raise Error unless list.include? name
+	kls = name.constantize
+	o.new opts
+      end
+
     end
   end
 

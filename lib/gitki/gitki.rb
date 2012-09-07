@@ -13,7 +13,11 @@ module Gitki
       @source_path = File.expand_path(@source_path)
       @site_path = opts[:to] || File.join(@source_path, "site")
       @source_path =File.expand_path(@source_path)
-      @renderer = Renderer::Full.new
+      @renderer = if render = opts.delete(:renderer)
+	Renderer.get render
+      else
+	Renderer::Full.new
+      end
     end
 
 
