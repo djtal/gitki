@@ -1,3 +1,33 @@
+header{
+  padding:5px 0;
+  border-bottom: solid 2px #2C2C2C;
+  margin-bottom: 10px;
+  text-align: center;
+  color: #555555;
+}
+
+footer{
+  margin-top: 10px;
+  padding: 5px 0;
+  border-top: solid 2px #2C2C2C;
+  color: #555555;
+}
+
+#toc{
+  border: dotted 1px #2C2C2C;
+  padding: 5px;
+  margin: 10px 0;
+}
+
+#toc li{
+  list-style: none;
+}
+
+#toc ul{
+  padding: 0;
+}
+
+
 .highlight pre{
     background-color: #F8F8F8;
     border: 1px solid #CCCCCC;
@@ -6,4 +36,11 @@
     line-height: 19px;
     overflow: auto;
     padding: 6px 10px;
+}
+
+.nav a{
+  text-decoration:none;
+}
+.nav a:hover{
+  text-decoration:none;
 }

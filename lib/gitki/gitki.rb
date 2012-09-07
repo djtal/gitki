@@ -7,7 +7,6 @@ module Gitki
     attr_accessor :renderer
     attr_accessor :site_path, :source_path
 
-
     def initialize(source_path,opts={})
       @source_path = source_path
       @source_path = File.expand_path(@source_path)
@@ -19,7 +18,6 @@ module Gitki
 	Renderer::Full.new
       end
     end
-
 
     def generate(opts={})
       create_site
@@ -45,7 +43,6 @@ module Gitki
       page = @renderer.render_page content, {:toc => false, :title => "Acceuil", :last_modified => Time.now.to_s, :rev => %x[cd #{@source_path} && git rev-parse --short HEAD]}
       write_file "index.html", page
     end
-
 
     #git log --pretty=oneline --abbrev-commit  --follow  gestion-proj.md
     def generate_history

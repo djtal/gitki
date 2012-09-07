@@ -34,7 +34,7 @@ module Gitki
 
       # API : Return the list of assets: js, css, images to copy into site
       def assets
-	@assets ||= Dir[File.join(@resources_path, "assets", "*.{js,css}")]
+	@assets ||= Dir[File.join(@resources_path, "assets", "*.{js,css,ttf,eot,svg,woff}")]
 	@assets
       end
 

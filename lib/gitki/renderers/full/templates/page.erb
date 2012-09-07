@@ -6,6 +6,7 @@
     <!-- Le styles -->
     <link rel="stylesheet" type="text/css" href="assets/normalize.css" media="all, print">
     <link rel="stylesheet" type="text/css" href="assets/grid.css" media="all, print">
+    <link rel="stylesheet" type="text/css" href="assets/font-awesome.css" media="all, print">
     <link rel="stylesheet" type="text/css" href="assets/styles.css" media="all, print">
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -16,11 +17,8 @@
     </style>
   </head>
   <body>
-    <header>
-      <%= title %>
-    </header>
-
     <div class="container row">
+      <header><em><%= title %></em></header>
       <% if toc %>
 	<div id="toc">
 	  <%= toc %>
@@ -35,7 +33,11 @@
 	<em>Derniere date de modification :  <%= last_modified %></em>
 	 | Version : <%= rev %>
       </p>
-      <p class="grid_3 column nav"><a href="index.html">Index</a> | <a href="history.html">Historique</a> | <a href="#">Haut</a></p>
+      <p class="grid_3 column nav">
+	<a href="index.html" title="Acceuil" alt="Acceuil"><i class="icon-home"></i></a> |
+	<a href="history.html" title="Historique" alt="Historique"><i class="icon-time"></i></a> |
+	<a href="#" title="Haut de page"><i class="icon-chevron-up"></i></a>
+      </p>
     </footer>
   </body>
 </html>
