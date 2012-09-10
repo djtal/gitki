@@ -38,9 +38,12 @@ footer{
     padding: 6px 10px;
 }
 
+
 .nav a{
   text-decoration:none;
+  color: #2C2C2C;
 }
 .nav a:hover{
   text-decoration:none;
+  color: #2C2C2C;
 }

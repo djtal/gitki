@@ -40,7 +40,7 @@ module Gitki
 	page << "* [#{File.basename entry, ".*" }](#{page_name entry})\n"
 	page
       end
-      page = @renderer.render_page content, {:toc => false, :title => "Acceuil", :last_modified => Time.now.to_s, :rev => %x[cd #{@source_path} && git rev-parse --short HEAD]}
+      page = @renderer.render_page content, {:file => "", :toc => false, :title => "Acceuil", :last_modified => Time.now.to_s, :rev => %x[cd #{@source_path} && git rev-parse --short HEAD]}
       write_file "index.html", page
     end
 
@@ -60,7 +60,7 @@ module Gitki
 	page << "\n\n"
 	page
       end
-      page = @renderer.render_page content, {:toc => false, :title => "Historique", :last_modified => Time.now.to_s, :rev => %x[cd #{@source_path} && git rev-parse --short HEAD]}
+      page = @renderer.render_page content, {:file => "", :toc => false, :title => "Historique", :last_modified => Time.now.to_s, :rev => %x[cd #{@source_path} && git rev-parse --short HEAD]}
       write_file "history.html", page
     end
 
@@ -81,7 +81,7 @@ module Gitki
 	:file => file,
 	:title => File.basename(file),
 	:last_modified => File.mtime(file).strftime("%d/%m/%Y a %H:%M"),
-	:rev => %x[cd #{@source_path} && git log -n1 --abbrev-commit --pretty=oneline -- #{file}]
+	:rev => %x[cd #{@source_path} && git log -n1 --abbrev-commit --pretty=oneline -- #{file}],
       }
       meta
     end

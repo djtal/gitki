@@ -14,7 +14,7 @@ module Gitki
       attr_accessor :resources_path
 
       def initialize
-	@converter = Redcarpet::Markdown.new(PygmentMarkdown.new, :fenced_code_blocks => true, :with_toc_data => true)
+	@converter = Redcarpet::Markdown.new(PygmentMarkdown.new(:with_toc_data => true), :fenced_code_blocks => true, :no_intra_emphasis => true  )
 	@toc = Redcarpet::Markdown.new(Redcarpet::Render::HTML_TOC.new)
 	@resources_path = File.dirname(File.expand_path(__FILE__))
       end
@@ -24,6 +24,7 @@ module Gitki
 	toc = opts.delete(:toc)
 	toc ||= true
         content = @converter.render(file)
+	title = @converter.renderer.title
         context = {
 	  :body => content,
 	  :code_css => PygmentMarkdown.code_css
