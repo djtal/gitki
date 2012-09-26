@@ -43,9 +43,9 @@ module Gitki
 
       def template
         unless @template
-          template = File.join(@resources_path, "templates", "page.erb")
+          template = File.join(@resources_path, "templates", "page.haml")
           if File.exist? template
-            @template = Tilt::ERBTemplate.new(template)
+            @template = Tilt.new(template)
           else
             raise Error
           end

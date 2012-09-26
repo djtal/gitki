@@ -1,0 +1,25 @@
+!!!
+
+%html
+  %head
+    %title= title
+    %link(rel="stylesheet" type="text/css" href="assets/normalize.css" media="all, print")
+    %link(rel="stylesheet" type="text/css" href="assets/grid.css" media="all, print")
+    %link(rel="stylesheet" type="text/css" href="assets/font-awesome.css" media="all, print")
+    %link(rel="stylesheet" type="text/css" href="assets/styles.css" media="all, print")
+  %body
+    .container.row
+      %header= title
+      - if toc
+        #toc= toc
+      .article= body
+      %footer
+        %p.column
+          %em #{title} @ #{rev} : #{last_modified}
+        %p.column.nav
+          %a(href="index.html" title="Acceuil" alt="Acceuil")
+            %i.icon-home
+          %a(href="history.html" title="Historique" alt="Historique")
+            %i.icon-time
+          %a(href="#" title="Haut de page")
+            %i.icon-chevron-up

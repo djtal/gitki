@@ -4,10 +4,11 @@ body{
 
 .container{
   background-color: white;
-  border-left: solid 1px #CCC;
-  border-right: solid 1px #CCC;
+  border: solid 1px #CCC;
   box-shadow: 0 1px 2px #D1D1D1;
-  padding: 0 20px;
+  padding: 10px 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 header{
@@ -53,6 +54,18 @@ footer{
   box-shadow: 0 1px 2px #d1d1d1;
 }
 
+code{
+  background-color: #CCC;
+  background-color: #F8F8F8;
+  border: 1px solid #CCC;
+  border-radius: 3px 3px 3px 3px;
+  font-size: 13px;
+  overflow: auto;
+  padding: 2px 5px;
+  box-shadow: 0 1px 2px #D1D1D1;
+  margin: 0 5px;
+}
+
 kbd{
   border: 1px solid #CCC;
   border-radius: 3px 3px 3px 3px;
@@ -60,6 +73,10 @@ kbd{
   background: #F8F8F8;
   box-shadow: 0 1px 2px #d1d1d1;
   font-size: 13px;
+}
+
+.nav{
+  float:right;
 }
 
 .nav a{
