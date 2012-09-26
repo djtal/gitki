@@ -48,10 +48,14 @@ Maybe they will be or not
 * manage intern link with [[page_name | filename]]
 * log (to STDOUT) important informations when generating site
 * better history
+* allow disabling history generation
 * better index
+* allow disable index generation
+* auto disbale history/index generation if files histroy/index are present src root
+* use a config file for all site generation like site.rb or somthing like that
 * add breadcrump based on folders
 * add new wiki creation
 * add a last modifed page with diff from last week for all page (and diff quantifier like +++ & --- on github)
 * basic seo rule like page title and maybe some meta keyword
-* anchor for h2 and h3 to work with toc
 * search page based on some js
+* use kbd tag for keyboyard shortcut display
