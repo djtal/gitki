@@ -45,6 +45,7 @@ Options are :
 
 Maybe they will be or not
 
+* more usage of thor thor can be use as main workflow to create site skeleton
 * manage intern link with [[page_name | filename]]
 * log (to STDOUT) important informations when generating site
 * better history
