@@ -1,18 +1,23 @@
 require 'gitki/renderers/renderer'
+require 'gitki/backend'
 require 'confstruct'
 
 module Gitki
 
+  # base class that dimplement gitki wrkflow using various other component
+  #
   class Gitki
 
     attr_accessor :renderer
     attr_accessor :site_path, :source_path
+
 
     def initialize(source_path,opts={})
       @source_path = source_path
       @source_path = File.expand_path(@source_path)
       @site_path = opts[:to] || File.join(@source_path, "site")
       @source_path =File.expand_path(@source_path)
+      @backend = Backend.new(@source_path)
       @renderer = if render = opts.delete(:renderer)
         Renderer.get render
       else
@@ -64,7 +69,7 @@ module Gitki
       FileUtils.rm(hist) if File.exist?(hist)
       history = {}
       files.each do |file|
-        history[file] = %x[cd #{@site_path} && git log --pretty=format:"%h - %an, %ar : %s" -- #{file}]
+        history[file] = @backend.history(file)
       end
       content = history.inject("") do |page, (file, hist)|
         page << "## #{file} ##\n\n"
@@ -74,7 +79,7 @@ module Gitki
         page << "\n\n"
         page
       end
-      page = @renderer.render_page content, {:file => "", :toc => false, :title => "Historique", :last_modified => Time.now.to_s, :rev => %x[cd #{@source_path} && git rev-parse --short HEAD]}
+      page = @renderer.render_page content, {:file => "", :toc => false, :title => "Historique", :last_modified => Time.now.to_s, :rev => @backend.last_revision}
       write_file "history.html", page
     end
 
@@ -95,17 +100,13 @@ module Gitki
         :file => file,
         :title => File.basename(file),
         :last_modified => File.mtime(file).strftime("%d/%m/%Y a %H:%M"),
-        :rev => %x[cd #{@source_path} && git log -n1 --abbrev-commit --pretty=oneline -- #{file}],
+        :rev => @backend.revision(file)
       }
       meta
     end
 
-    # May be base on git to only inlcude versionned files
-    # see output of git ls-files
-    # filtered with a *.md regexp to only include mardown files
     def files
-      @files ||= %x[cd #{@source_path} && git ls-files].split("\n").grep(/.*\.md$/)
-      @files
+      @backend.files
     end
 
     def page_name path

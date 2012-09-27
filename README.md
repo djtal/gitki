@@ -59,3 +59,14 @@ Maybe they will be or not
 * basic seo rule like page title and maybe some meta keyword
 * search page based on some js
 * use kbd tag for keyboyard shortcut display
+
+
+## Search
+
+* build an inverted index when generating site
+* conssume this index with javascript on the client side
+
+Usefull links on inverted index and full text search
+
+* http://www.scribd.com/doc/15008618/4/Building-an-Inverted-Index
+* http://rosettacode.org/wiki/Inverted_Index
