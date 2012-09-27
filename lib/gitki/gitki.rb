@@ -97,7 +97,7 @@ module Gitki
     # use git log --abbrev-commit --pretty=oneline  -n1 -- gestion-proj.md to get the last comit that change a file
     def extract_metadata(file)
       meta = {
-        :file => file,
+        :file => File.basename(file),
         :title => File.basename(file),
         :last_modified => File.mtime(file).strftime("%d/%m/%Y a %H:%M"),
         :rev => @backend.revision(file)

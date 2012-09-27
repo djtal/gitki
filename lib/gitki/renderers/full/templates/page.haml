@@ -1,4 +1,4 @@
-!!!
+!!! 5
 
 %html
   %head
@@ -7,6 +7,7 @@
     %link(rel="stylesheet" type="text/css" href="assets/grid.css" media="all, print")
     %link(rel="stylesheet" type="text/css" href="assets/font-awesome.css" media="all, print")
     %link(rel="stylesheet" type="text/css" href="assets/styles.css" media="all, print")
+    %style= code_css
   %body
     .container.row
       %header= title
@@ -15,7 +16,7 @@
       .article= body
       %footer
         %p.column
-          %em #{title} @ #{rev} : #{last_modified}
+          %em #{file} @ #{rev} : #{last_modified}
         %p.column.nav
           %a(href="index.html" title="Acceuil" alt="Acceuil")
             %i.icon-home
