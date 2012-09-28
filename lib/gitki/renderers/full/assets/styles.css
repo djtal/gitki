@@ -42,8 +42,17 @@ footer{
   padding: 0;
 }
 
+@font-face{
+  font-family: "SourceCodePro";
+  src: url('./SourceCodePro-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 
 .highlight pre{
+  font-family: SourceCodePro;
+  font-weight: normal;
+  font-style: normal;
   background-color: #F8F8F8;
   border: 1px solid #CCCCCC;
   border-radius: 3px 3px 3px 3px;
