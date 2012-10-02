@@ -7,8 +7,9 @@ module Gitki
     attr_accessor :git_data
 
     METADATA = {
-      :toc => false,
-      :file => 'history.md'
+      :show_toc => false,
+      :keep_title => true,
+      :title => 'Historique des modifications'
     }
 
     attr_accessor :git_data

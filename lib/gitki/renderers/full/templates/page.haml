@@ -3,6 +3,7 @@
 %html
   %head
     %title= title
+    %meta{ "http-equiv" => "Content-Type",    :content => "text/html; charset=utf-8" }
     %link(rel="stylesheet" type="text/css" href="assets/normalize.css" media="all, print")
     %link(rel="stylesheet" type="text/css" href="assets/grid.css" media="all, print")
     %link(rel="stylesheet" type="text/css" href="assets/font-awesome.css" media="all, print")
@@ -12,7 +13,7 @@
   %body
     .container.row
       %header= title
-      - if toc
+      - if show_toc
         #toc= toc
       .article= body
       %footer

@@ -28,7 +28,7 @@ module Gitki
         toc ||= true
         page[:body] = @converter.render(page.content).to_s
         title = @converter.renderer.headers.first
-        page[:title] = title unless title.blank?
+        page[:title] = title unless title.blank? || page.keep_title
         page[:toc] = @toc.render(page.content) if toc
         template.render page
       end

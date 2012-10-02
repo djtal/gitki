@@ -7,7 +7,8 @@ module Gitki
     attr_accessor :data
 
     METADATA = {
-      :toc => false,
+      :show_toc => false,
+      :keep_title => true,
       :title => "Acceuil"
     }
 

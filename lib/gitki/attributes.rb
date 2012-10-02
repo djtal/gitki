@@ -12,12 +12,13 @@ module Gitki
 
     module InstanceMethods
       def metadata
-        @metadata ||= (self.class::METADATA || {}).merge({
+        @metadata ||= {
             :file => self.class.to_s.downcase,
             :title => self.class.to_s.downcase,
             :last_modified => Time.now,
-            :rev => ""
-        })
+            :rev => "",
+            :show_toc => false
+        }.merge(self.class::METADATA || {})
       end
 
       def []=(key, value)
@@ -27,8 +28,8 @@ module Gitki
       end
 
       def method_missing(m, *args)
-        if value = self.metadata[m.to_sym]
-          value
+        if self.metadata[m.to_sym] != nil
+          self.metadata[m.to_sym]
         else
           super(m, args)
         end

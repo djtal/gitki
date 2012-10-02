@@ -6,6 +6,8 @@ module Gitki
   # in this class
   #
   class Page
+    include Attributes
+
     attr_accessor :path, :name
     attr_accessor :revision
     attr_accessor :content
@@ -22,24 +24,14 @@ module Gitki
       @metadata ||= {
         :file => File.basename(@path),
         :title => File.basename(@path),
-        :last_modified => File.mtime(@path).strftime("%d/%m/%Y a %H:%M")
+        :last_modified => File.mtime(@path).strftime("%d/%m/%Y a %H:%M"),
+        :show_toc => true,
+        :keep_title => false,
       }
-    end
-
-    def []=(key, value)
-      @metadata[key] = value
     end
 
     def name
       metadata[:file]
-    end
-
-    def method_missing(m, *args)
-      if value = metadata[m.to_sym]
-        value
-      else
-        super(m, args)
-      end
     end
 
   end
