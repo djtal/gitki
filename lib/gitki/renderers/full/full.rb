@@ -14,6 +14,7 @@ module Gitki
       attr_accessor :template
       attr_accessor :resources_path
 
+
       def initialize
         renderer = PygmentMarkdown.new(:with_toc_data => true)
         @converter = Redcarpet::Markdown.new(renderer, :fenced_code_blocks => true, :no_intra_emphasis => true  )
@@ -22,18 +23,14 @@ module Gitki
       end
 
       # API : convert a mardonw page to an complete html page
-      def render_page(file, opts = {})
+      def render_page(page, opts = {})
         toc = opts.delete(:toc)
         toc ||= true
-        content = @converter.render(file)
+        page[:body] = @converter.render(page.content).to_s
         title = @converter.renderer.headers.first
-        context = {
-          :body => content,
-          :code_css => PygmentMarkdown.code_css,
-        }.merge(opts)
-        context[:title] = title unless title.blank?
-        context[:toc] = @toc.render(file) if toc
-        template.render self, context
+        page[:title] = title unless title.blank?
+        page[:toc] = @toc.render(page.content) if toc
+        template.render page
       end
 
       # API : Return the list of assets: js, css, images to copy into site

@@ -1,5 +1,10 @@
+require 'logger'
 require 'gitki/renderers/renderer'
 require 'gitki/backend'
+require 'gitki/attributes'
+require 'gitki/page'
+require 'gitki/history'
+require 'gitki/index'
 require 'confstruct'
 
 module Gitki
@@ -10,6 +15,7 @@ module Gitki
 
     attr_accessor :renderer
     attr_accessor :site_path, :source_path
+    attr_accessor :logger
 
 
     def initialize(source_path,opts={})
@@ -17,6 +23,7 @@ module Gitki
       @source_path = File.expand_path(@source_path)
       @site_path = opts[:to] || File.join(@source_path, "site")
       @source_path =File.expand_path(@source_path)
+      @logger = Logger.new(STDOUT)
       @backend = Backend.new(@source_path)
       @renderer = if render = opts.delete(:renderer)
         Renderer.get render
@@ -46,20 +53,20 @@ module Gitki
     end
 
     def convert
-      files.each do |file|
-        file_path = File.join(@source_path, file)
-        page = @renderer.render_page File.read(file_path), extract_metadata(file_path)
-        write_file page_name(file), page
+      files.each do |page|
+        page[:rev] = @backend.revision page.file
+        write_file(page_name(page.name), @renderer.render_page(page))
       end
     end
 
     # Generate an index file containing all file present in directory
     def generate_index
       content = files.inject("") do |page,entry|
-        page << "* [#{File.basename entry, ".*" }](#{page_name entry})\n"
+        page << "* [#{entry.name}](#{page_name entry.file})\n"
         page
       end
-      page = @renderer.render_page content, {:file => "", :toc => false, :title => "Acceuil", :last_modified => Time.now.to_s, :rev => %x[cd #{@source_path} && git rev-parse --short HEAD]}
+      index = Index.new(files.map { |page| [page.name, page_name(page.file)]})
+      page = @renderer.render_page index
       write_file "index.html", page
     end
 
@@ -67,19 +74,12 @@ module Gitki
     def generate_history
       hist = File.join(@source_path, "history.md")
       FileUtils.rm(hist) if File.exist?(hist)
-      history = {}
-      files.each do |file|
-        history[file] = @backend.history(file)
+      data = files.inject({}) do |acc, page|
+        acc[page.name] = @backend.history(page.name)
+        acc
       end
-      content = history.inject("") do |page, (file, hist)|
-        page << "## #{file} ##\n\n"
-        hist.each_line do |line|
-          page << "* #{line}"
-        end
-        page << "\n\n"
-        page
-      end
-      page = @renderer.render_page content, {:file => "", :toc => false, :title => "Historique", :last_modified => Time.now.to_s, :rev => @backend.last_revision}
+      history = History.new(data)
+      page = @renderer.render_page history
       write_file "history.html", page
     end
 
@@ -106,7 +106,7 @@ module Gitki
     end
 
     def files
-      @backend.files
+      @pages ||= @backend.files.map { |file| Page.new(file) }
     end
 
     def page_name path
@@ -115,6 +115,7 @@ module Gitki
     end
 
     def write_file name, content
+      logger.info "Generate #{name}"
       File.open(File.join(@site_path, name), "w+") do |file|
         file << content
       end

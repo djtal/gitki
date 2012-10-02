@@ -8,6 +8,8 @@ module Gitki
       attr_reader :title
       attr_reader :headers
 
+      EMOJI_PATTERN = %r{(:(\S+):)}.freeze
+
       def self.code_css
         Pygments.css('.highlight')
       end
@@ -26,7 +28,21 @@ module Gitki
 
       def preprocess(full_document)
         @headers = []
+        parse_emoji full_document
+      end
+
+      def postprocess(full_document)
         full_document
+      end
+
+
+      private
+
+      def parse_emoji(text)
+        text.gsub!(EMOJI_PATTERN) do |match|
+          "<img class='emoji' src='emojis/#{$2}.png' width='20' alt='#{$1}'></img>"
+        end
+        text
       end
     end
   end

@@ -1,5 +1,5 @@
 
-## GitKi ##
+# GitKi
 
 
 Simple wiki using Git and Mardown
@@ -10,7 +10,7 @@ Your write your file in mardown version them with git. And then gitki take all t
 
 
 
-## Usage ##
+## Usage
 
 ### Create a new gitki wiki.
 
@@ -45,6 +45,7 @@ Options are :
 
 Maybe they will be or not
 
+* emoji support
 * more usage of thor thor can be use as main workflow to create site skeleton
 * manage intern link with [[page_name | filename]]
 * log (to STDOUT) important informations when generating site

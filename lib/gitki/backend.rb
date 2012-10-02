@@ -14,7 +14,7 @@ module Gitki
     # filtered with a *.md regexp to only include mardown files
     def files
       @files ||= %x[cd #{@source_path} && git ls-files].split("\n").grep(/.*\.md$/)
-      @files
+      @files.map! { |file| File.join(@source_path, file) }
     end
 
     def revision(file)
