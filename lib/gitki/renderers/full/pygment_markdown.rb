@@ -40,7 +40,7 @@ module Gitki
 
       def parse_emoji(text)
         text.gsub!(EMOJI_PATTERN) do |match|
-          "<img class='emoji' src='emojis/#{$2}.png' width='20' alt='#{$1}'></img>"
+          "<img class='emoji' src='assets/#{$2}.png' width='20' alt='#{$1}'></img>"
         end
         text
       end

@@ -48,7 +48,6 @@ Maybe they will be or not
 * emoji support
 * more usage of thor thor can be use as main workflow to create site skeleton
 * manage intern link with [[page_name | filename]]
-* log (to STDOUT) important informations when generating site
 * better history
 * allow disabling history generation
 * better index
@@ -60,7 +59,7 @@ Maybe they will be or not
 * add a last modifed page with diff from last week for all page (and diff quantifier like +++ & --- on github)
 * basic seo rule like page title and maybe some meta keyword
 * search page based on some js
-* use kbd tag for keyboyard shortcut display
+* use scss for stylesheet and improve asset managment
 
 
 ## Search
