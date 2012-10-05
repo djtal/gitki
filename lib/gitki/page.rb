@@ -1,3 +1,5 @@
+require "gitki/attributes"
+
 module Gitki
 
   # A page hold all data for each page to convert
