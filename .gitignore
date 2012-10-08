@@ -1,3 +1,7 @@
+lib/gitki/renderers/full/assets/emoji
+lib/gitki/renderers/full/assets/emoji/*.*
+lib/gitki/renderers/full/assets/emoji/*/*.*
+
 *.gem
 *.rbc
 .bundle
