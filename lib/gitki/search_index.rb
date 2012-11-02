@@ -1,4 +1,4 @@
-require 'multy_json'
+require 'multi_json'
 require 'oj'
 
 module Gitki
@@ -6,22 +6,28 @@ module Gitki
   class SearchIndex
     attr_reader :index_json
 
-    def initialize(pages)
-      @pages = pages
+    def initialize
+      @data = {}
     end
 
     def inverted_index
-      @data = {}
       @pages.each do |page|
-        @page[page.name] = page.content.split.map do |token|
-          token.downcase.gsub(/\W/, '')
+        page.content.split.map do |line|
+          line.split.downcase.gsub(/\W/, '').each do |word|
+            @data[word] ||= []
+            @data[word] << page.name
+          end
         end
       end
       @index_json = MultiJson.dump(@data)
     end
 
-    def search_page
+    def add_page_to_index page_name, content
 
+    end
+
+    def index
+      @data
     end
 
   end

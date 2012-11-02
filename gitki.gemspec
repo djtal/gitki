@@ -24,6 +24,8 @@ Gem::Specification.new do |gem|
   gem.add_dependency "pygments.rb"
   gem.add_dependency "confstruct"
   gem.add_dependency "gemoji"
+  gem.add_dependency "multi_json"
+  gem.add_dependency "oj"
 
   gem.add_development_dependency "rspec"
 end
