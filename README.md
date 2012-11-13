@@ -45,9 +45,7 @@ Options are :
 
 Maybe they will be or not
 
-* emoji support
 * more usage of thor thor can be use as main workflow to create site skeleton
-* manage intern link with [[page_name | filename]]
 * better history
 * allow disabling history generation
 * better index

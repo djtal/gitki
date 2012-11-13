@@ -2,6 +2,7 @@ require 'redcarpet'
 require 'tilt'
 require 'gitki/renderers/full/custom_markdown'
 require 'active_support/core_ext/object/blank'
+require 'gemoji'
 
 module Gitki
 
@@ -36,7 +37,7 @@ module Gitki
       # API : Return the list of assets: js, css, images to copy into site
       def assets
         @assets ||= Dir[File.join(@resources_path, "assets", "*.{js,css,ttf,eot,svg,woff,png,jpeg}")]
-        @assets << Dir[File.join(@resources_path, "assets", "emoji",  "*.{png,jpeg}")]
+        @assets << Dir[File.join(Emoji.images_path, "emoji", "*.png")]
         @assets
       end
 
