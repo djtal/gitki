@@ -1,6 +1,6 @@
 require 'redcarpet'
 require 'tilt'
-require 'gitki/renderers/full/pygment_markdown'
+require 'gitki/renderers/full/custom_markdown'
 require 'active_support/core_ext/object/blank'
 
 module Gitki
@@ -16,7 +16,7 @@ module Gitki
 
 
       def initialize
-        renderer = PygmentMarkdown.new(:with_toc_data => true)
+        renderer = CustomMarkdown.new(:with_toc_data => true)
         @converter = Redcarpet::Markdown.new(renderer, :fenced_code_blocks => true, :no_intra_emphasis => true  )
         @toc = Redcarpet::Markdown.new(Redcarpet::Render::HTML_TOC.new)
         @resources_path = File.dirname(File.expand_path(__FILE__))
