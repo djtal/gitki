@@ -24,5 +24,6 @@ describe Gitki::RuggedBackend do
       "babc5980334f21d4305f0a84b4dce6447d1d6fef" => "wiki creation",
       "9917b30be2b8b1d4d96b5cc72e6e0f5430ff7f50" => "file1 content"
     }
+    rugged_backend.history(File.expand_path("./test/test_wiki/regexp.md")).should == expected
   end
 end
