@@ -25,8 +25,11 @@ Gem::Specification.new do |gem|
   gem.add_dependency "confstruct"
   gem.add_dependency "gemoji"
   gem.add_dependency "multi_json"
-  gem.add_dependency "oj"
+  # gem.add_dependency "oj"
   gem.add_dependency "rugged"
 
   gem.add_development_dependency "rspec"
+  gem.add_development_dependency "guard"
+  gem.add_development_dependency "rb-fsevent", "~>0.9"
+  gem.add_development_dependency "guard-rspec"
 end
