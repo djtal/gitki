@@ -5,12 +5,12 @@ describe Gitki::RuggedBackend do
   let(:backend) { Gitki::RuggedBackend.new(File.expand_path("test/test_repo")) }
 
   it "should retrieve last sha of a given file" do
-    expected = { "41fb9a11afd776a74655436faa2dd8d48fee610d" => "wiki creation\n" }
+    expected = { "58832619e7af65c6fbb563793653e6df5e7566ed" => "file1 content\n" }
     backend.revision("file1.md").should == expected
   end
 
   it "it should get the last modified sha of a repo" do
-    expected = { "860cced4c88b9d4170dd4919f453667681914a6d" => "add file 2, 3, 4\n" }
+    expected = { "58832619e7af65c6fbb563793653e6df5e7566ed" => "file1 content\n" }
     backend.last_revision.should == expected
   end
 
@@ -25,5 +25,9 @@ describe Gitki::RuggedBackend do
       "9917b30be2b8b1d4d96b5cc72e6e0f5430ff7f50" => "file1 content"
     }
     backend.history(File.expand_path("./test/test_wiki/regexp.md")).should == expected
+  end
+
+  it "should read file content" do
+    backend.file("file1.md").should == "awesome content\n"
   end
 end
