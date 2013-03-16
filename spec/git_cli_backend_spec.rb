@@ -1,8 +1,8 @@
 require "rspec"
-require "gitki/rugged_backend"
+require "gitki/git_cli_backend"
 
-describe Gitki::RuggedBackend do
-  let(:backend) { Gitki::RuggedBackend.new(File.expand_path("test/test_repo")) }
+describe Gitki::GitCliBackend do
+  let(:backend) { Gitki::GitCliBackend.new(File.expand_path("test/test_repo")) }
 
   it "should retrieve last sha of a given file" do
     expected = { "58832619e7af65c6fbb563793653e6df5e7566ed" => "file1 content" }
@@ -21,8 +21,8 @@ describe Gitki::RuggedBackend do
 
   it "should retriece all commit of a given file" do
     expected = {
-      "babc5980334f21d4305f0a84b4dce6447d1d6fef" => "wiki creation",
-      "9917b30be2b8b1d4d96b5cc72e6e0f5430ff7f50" => "file1 content"
+      "58832619e7af65c6fbb563793653e6df5e7566ed" => "file1 content",
+      "41fb9a11afd776a74655436faa2dd8d48fee610d" => "wiki creation",
     }
     backend.history("file1.md").should == expected
   end
@@ -37,5 +37,4 @@ describe Gitki::RuggedBackend do
       backend.file("file1.md").should == "awesome content\n"
     end
   end
-
 end

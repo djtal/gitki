@@ -8,7 +8,7 @@ module Gitki
 
     def last_revision
       head = @repo.lookup(@repo.head.target)
-      { @repo.head.target => head.message }
+      { @repo.head.target => head.message.chop }
     end
 
     def revision(file)
