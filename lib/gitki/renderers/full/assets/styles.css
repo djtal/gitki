@@ -26,21 +26,28 @@ footer{
   color: #555555;
 }
 
-#toc{
-  border: 1px solid #CCC;
-  border-radius: 3px 3px 3px 3px;
-  padding: 5px;
-  margin: 10px 0;
-  background-color: #F8F8F8;
+.table-of-contents {
+  float: right;
+  width: 25%;
+  background: #eee;
+  font-size: 0.8em;
+  padding: 1em 2em;
+  margin: 0 0 0.5em 0.5em;
 }
-
-#toc li{
-  list-style: none;
-}
-
-#toc ul{
+.table-of-contents ul {
   padding: 0;
 }
+.table-of-contents li {
+  margin: 0 0 0.25em 0;
+}
+.table-of-contents a {
+  text-decoration: none;
+}
+.table-of-contents a:hover,
+.table-of-contents a:active {
+  text-decoration: underline;
+}
+
 
 @font-face{
   font-family: "SourceCodePro";

@@ -14,7 +14,7 @@
     .container.row
       %header= title
       - if show_toc
-        #toc= toc
+        %nav.table-of-contents= toc
       .article= body
       %footer
         %p.column
