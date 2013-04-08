@@ -18,7 +18,9 @@
       .article= body
       %footer
         %p.column
-          %em #{file} @ #{rev} : #{last_modified}
+          %span.revision #{file}@#{rev}
+          &nbsp;:&nbsp;
+          %span.last_modified=last_modified
         %p.column.nav
           %a(href="index.html" title="Acceuil" alt="Acceuil")
             %i.icon-home

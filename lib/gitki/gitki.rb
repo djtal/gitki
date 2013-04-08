@@ -54,7 +54,7 @@ module Gitki
 
     def convert
       files.each do |page|
-        page[:rev] = @backend.revision page.file
+        page[:rev] = @backend.revision page.path
         write_file(page_name(page.name), @renderer.render_page(page))
       end
     end
@@ -75,7 +75,7 @@ module Gitki
       hist = File.join(@source_path, "history.md")
       FileUtils.rm(hist) if File.exist?(hist)
       data = files.inject({}) do |acc, page|
-        acc[page.name] = @backend.history(page.name)
+        acc[page.name] = @backend.history(page.path)
         acc
       end
       history = History.new(data)
