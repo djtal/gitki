@@ -61,13 +61,7 @@ module Gitki
 
     # Generate an index file containing all file present in directory
     def generate_index
-      content = files.inject("") do |page,entry|
-        page << "* [#{entry.name}](#{page_name entry.file})\n"
-        page
-      end
-      index = Index.new(files.map { |page| [page.name, page_name(page.file)]})
-      page = @renderer.render_page index
-      write_file "index.html", page
+      write_file("index.html", @renderer.render_page(Index.new(pages)))
     end
 
     #git log --pretty=oneline --abbrev-commit  --follow  gestion-proj.md

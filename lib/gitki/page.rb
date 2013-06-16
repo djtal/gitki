@@ -36,6 +36,9 @@ module Gitki
       metadata[:file]
     end
 
+    def page_file_name
+    end
+
   end
 
 

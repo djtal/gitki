@@ -27,6 +27,23 @@ describe Gitki::Page do
       end
    end
 
+    context "any page" do
+     describle "file_page_name" do
+        it "should be the page title.html if title is given" do
+          page.title = "an awsome page to read"
+          page.file_page_name.should == "an_awesome_page_to_read.html"
+
+        end
+
+        it "should be the filename extension exetion plus html if no title is given" do
+          page.title = nil
+          page.file = "some_awesome_tools.md"
+          page.file_page_name.should == "some_awesome_tools.html"
+        end
+      end
+
+    end
+
   end
 end
 

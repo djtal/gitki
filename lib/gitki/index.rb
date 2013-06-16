@@ -14,8 +14,8 @@ module Gitki
 
     attr_accessor :git_data
 
-    def initialize(content, opts = {})
-      @data = content
+    def initialize(pages, opts = {})
+      @pages = pages
     end
 
     def content
